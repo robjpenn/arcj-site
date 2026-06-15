@@ -50,13 +50,6 @@ function Hero({ onBook, onNav }) {
           <div className="wb-hero__panel">
             <img src="assets/imagery/build-something-real.png" alt="Build something real" />
           </div>
-          <div className="wb-hero__badge">
-            <img src="assets/logo/arcj-mark-white.svg" alt="" />
-            <div>
-              <div className="wb-hero__badge-k">aRcj Ltd</div>
-              <div className="wb-hero__badge-s">Consultancy · London</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
