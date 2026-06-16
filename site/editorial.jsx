@@ -3,15 +3,15 @@ const NS2 = () => window.ARcjDesignSystem_f07cf4;
 
 // ─── Set this to YOUR Formspree form endpoint (see the launch checklist) ───
 // Until you do, the form still shows the thank-you state but won't deliver email.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrevjked';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
 const ARTICLES = [
   { t: "The Maker's Mindset", c: 'Mindset', img: 'makers-mindset.png', read: '5 min', big: true,
     d: 'Why the best founders still build with their hands — and how to keep that instinct as you scale.' },
   { t: 'Boards that Build', c: 'Advisory', img: 'boards-that-build.png', read: '6 min',
     d: 'A board should add horsepower, not paperwork.' },
-  { t: 'The Efficiency Gap', c: 'Growth', img: 'the-efficiency-gap.png', read: '4 min',
-    d: 'Where small teams quietly lose their edge.' },
+  { t: 'The Shortest Path to Business Success', c: 'Growth', img: 'the-efficiency-gap.png', read: '5 min', url: 'articles/strategy-and-growth.html',
+    d: 'Positioning, pricing and go-to-market — the shortest line from where you are to where your business needs to be.' },
   { t: 'The Responsible Founder', c: 'Mindset', img: 'responsible-founder.png', read: '7 min',
     d: 'Building a company you would still be proud of in ten years.' },
   { t: 'Build to Last', c: 'Strategy', img: 'build-to-last.png', read: '5 min',
@@ -42,6 +42,7 @@ function Articles() {
         <div className="wb-articles">
           {feature && (
             <Card className="wb-article wb-article--feat" elevation="raised" interactive
+                  onClick={feature.url ? () => { window.location.href = feature.url; } : undefined}
                   media={`assets/imagery/${feature.img}`} padding="lg">
               <Badge variant="gold">{feature.c}</Badge>
               <h3 className="wb-article__t wb-article__t--feat">{feature.t}</h3>
@@ -51,7 +52,8 @@ function Articles() {
           )}
           <div className="wb-articles__col">
             {rest.map(a => (
-              <Card key={a.t} className="wb-article wb-article--row" elevation="flat" interactive padding="sm">
+              <Card key={a.t} className="wb-article wb-article--row" elevation="flat" interactive padding="sm"
+                    onClick={a.url ? () => { window.location.href = a.url; } : undefined}>
                 <div className="wb-article__row">
                   <img className="wb-article__thumb" src={`assets/imagery/${a.img}`} alt="" />
                   <div className="wb-article__rowbody">
