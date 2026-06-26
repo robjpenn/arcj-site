@@ -179,12 +179,29 @@ function Engagements() {
 
 /* ── Where we work: a low-key auto-advancing carousel ──
    Each slide shows a photo if one exists at its `img` path; until then a
-   tasteful branded panel stands in. To populate: drop the named files into
-   assets/imagery/ (e.g. carousel-london.jpg) — no code change needed. */
+   designed city panel stands in. To populate with real photography, drop the
+   named files into assets/imagery/ (e.g. carousel-london.jpg) — no code change. */
 const SLIDES = [
-  { tone: 'navy', img: 'assets/imagery/carousel-london.jpg', eyebrow: 'Where we’re based', k: 'London', d: 'Our home base — and the start of every conversation.' },
-  { tone: 'ink',  img: 'assets/imagery/carousel-gateway.jpg', eyebrow: 'Where we work', k: 'Gateway cities', d: 'A physical footprint in the world’s top 100 gateway cities.' },
-  { tone: 'sand', img: 'assets/imagery/carousel-onground.jpg', eyebrow: 'How we deliver', k: 'On the ground', d: 'Outputs, not recommendations — something real, in tier-one locations.' },
+  { city: 'London', img: 'assets/imagery/carousel-london.jpg',
+    bg: 'linear-gradient(135deg, #16223A 0%, #1F2E47 55%, #2A3C5A 100%)',
+    title: 'The full picture, held',
+    d: 'Every priority held at once — so nothing pulls against anything else.' },
+  { city: 'New York', img: 'assets/imagery/carousel-newyork.jpg',
+    bg: 'linear-gradient(135deg, #0A0A0A 0%, #141A26 60%, #1F2E47 100%)',
+    title: 'Outputs, not recommendations',
+    d: 'The actual deliverables — models, plans, frameworks — not slides about them.' },
+  { city: 'Dubai', img: 'assets/imagery/carousel-dubai.jpg',
+    bg: 'linear-gradient(135deg, #111F3A 0%, #1F2E47 50%, #3A2E1A 100%)',
+    title: 'AI-augmented delivery',
+    d: 'AI throughout: faster work, consistent across every output, no friction.' },
+  { city: 'Singapore', img: 'assets/imagery/carousel-singapore.jpg',
+    bg: 'linear-gradient(135deg, #0E1B2E 0%, #1F2E47 60%, #24506B 100%)',
+    title: 'Physical footprint expertise',
+    d: 'Direct experience of establishing a presence in a world-class city.' },
+  { city: 'Paris', img: 'assets/imagery/carousel-paris.jpg',
+    bg: 'linear-gradient(135deg, #1A1622 0%, #1F2E47 65%, #2A3C5A 100%)',
+    title: 'No handoff',
+    d: 'The person who scopes the engagement is the person who drives it.' },
 ];
 
 function Showcase() {
@@ -204,15 +221,17 @@ function Showcase() {
              onMouseEnter={() => setPaused(true)}
              onMouseLeave={() => setPaused(false)}>
           {SLIDES.map((s, idx) => (
-            <div key={s.k}
-                 className={`wb-slide wb-slide--${s.tone} ${idx === i ? 'is-active' : ''}`}
+            <div key={s.city}
+                 className={`wb-slide ${idx === i ? 'is-active' : ''}`}
+                 style={{ background: s.bg }}
                  aria-hidden={idx === i ? 'false' : 'true'}>
               <img className="wb-slide__img" src={s.img} alt=""
                    onError={(e) => { e.target.style.display = 'none'; }} />
+              <span className="wb-slide__watermark" aria-hidden="true">{s.city}</span>
               <div className="wb-slide__scrim"></div>
               <div className="wb-slide__cap">
-                <span className="wb-slide__eyebrow">{s.eyebrow}</span>
-                <span className="wb-slide__k">{s.k}</span>
+                <span className="wb-slide__eyebrow">Gateway city · {s.city}</span>
+                <span className="wb-slide__k">{s.title}</span>
                 <span className="wb-slide__d">{s.d}</span>
               </div>
             </div>
@@ -225,8 +244,8 @@ function Showcase() {
           </button>
           <div className="wb-show__dots">
             {SLIDES.map((s, idx) => (
-              <button key={s.k} className={`wb-show__dot ${idx === i ? 'is-active' : ''}`}
-                      aria-label={`Go to ${s.k}`} onClick={() => setI(idx)}></button>
+              <button key={s.city} className={`wb-show__dot ${idx === i ? 'is-active' : ''}`}
+                      aria-label={`Go to ${s.city}`} onClick={() => setI(idx)}></button>
             ))}
           </div>
         </div>
