@@ -2,7 +2,7 @@
 const NS2 = () => window.ARcjDesignSystem_f07cf4;
 
 // ─── Set this to YOUR Formspree form endpoint (see HOW-TO-LAUNCH.md) ───
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xrevjked';
 
 function HowWeWork() {
   const { Eyebrow } = NS2();
