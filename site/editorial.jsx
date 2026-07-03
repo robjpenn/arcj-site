@@ -82,6 +82,9 @@ function Contact() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form),
       });
+      if (res.ok && typeof window.gtag === 'function') {
+        window.gtag('event', 'form_submit', { event_category: 'contact', event_label: 'enquiry_form' });
+      }
       setStatus(res.ok ? 'sent' : 'error');
     } catch (err) { setStatus('error'); }
   };
