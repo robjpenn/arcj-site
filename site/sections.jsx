@@ -6,6 +6,48 @@ const Arrow = () => (
   <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
 );
 
+/* Client tools dropdown — brand-styled, self-contained (no extra CSS needed).
+   Add more tools by extending the `tools` array below. */
+function ToolsMenu() {
+  const [open, setOpen] = React.useState(false);
+  const [hover, setHover] = React.useState(-1);
+  const wrapRef = React.useRef(null);
+  React.useEffect(() => {
+    const onDoc = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('click', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('click', onDoc); document.removeEventListener('keydown', onKey); };
+  }, []);
+  const tools = [
+    { k: 'Focus Tool', d: 'Prioritise your ideas', href: '/focus' },
+    // Add more tools here as you build them:
+    // { k: 'Another Tool', d: 'Short description', href: '/another' },
+  ];
+  return (
+    <div ref={wrapRef} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
+         onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button type="button" aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', font: 'inherit', fontSize: 'var(--fs-body-sm)', fontWeight: 'var(--fw-medium)', letterSpacing: 'var(--ls-snug)', color: open ? 'var(--text-primary)' : 'var(--text-secondary)', background: 'none', border: 'none', padding: 0, cursor: 'pointer', transition: 'color var(--dur-base) var(--ease-out)' }}>
+        Client tools
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: open ? 'rotate(180deg)' : 'none', transition: 'transform var(--dur-base) var(--ease-out)' }}><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div role="menu" style={{ position: 'absolute', top: '100%', right: 0, paddingTop: '14px', opacity: open ? 1 : 0, visibility: open ? 'visible' : 'hidden', transform: open ? 'translateY(0)' : 'translateY(-6px)', transition: 'opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out)', zIndex: 60 }}>
+        <div style={{ minWidth: '216px', background: 'var(--surface-card)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', padding: '8px' }}>
+          {tools.map((t, idx) => (
+            <a key={t.href} role="menuitem" href={t.href}
+               onMouseEnter={() => setHover(idx)} onMouseLeave={() => setHover(-1)}
+               style={{ display: 'flex', flexDirection: 'column', gap: '2px', padding: '10px 12px', borderRadius: 'var(--radius-md)', textDecoration: 'none', background: hover === idx ? 'var(--surface-sunken)' : 'transparent', transition: 'background var(--dur-base) var(--ease-out)' }}>
+              <span style={{ fontSize: 'var(--fs-body-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-primary)', letterSpacing: 'var(--ls-snug)' }}>{t.k}</span>
+              <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{t.d}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Header({ onNav, onBook }) {
   const { Logo, Button } = NS();
   const links = [['Strategy & Growth','strategy-growth.html'], ['Marketing & Brand','marketing-brand.html'], ['Board Advisory','board-advisory.html'], ['About','about.html']];
@@ -17,6 +59,7 @@ function Header({ onNav, onBook }) {
           {links.map(([label, href]) => (
             <a key={href} href={href} className="wb-nav__link">{label}</a>
           ))}
+          <ToolsMenu />
         </nav>
         <div className="wb-header__cta">
           <Button variant="primary" size="sm" iconRight={<Arrow/>} onClick={onBook}>Talk to us</Button>
