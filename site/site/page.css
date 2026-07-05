@@ -29,6 +29,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .pg-btn--secondary:hover { border-color: var(--border-strong); }
 .pg-btn--lg { padding: 15px 26px; font-size: var(--fs-body); }
 .pg-btn svg { width: 1em; height: 1em; }
+.pg-wa-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #25D366; color: #fff; flex: none; transition: transform var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out); }
+.pg-wa-btn:hover { transform: translateY(-1px); background: #1DA851; }
+.pg-wa-btn svg { width: 20px; height: 20px; }
+.pg-header__cta { display: flex; align-items: center; gap: 10px; }
 
 @media (max-width: 920px) { .pg-nav__links { display: none; } }
 
