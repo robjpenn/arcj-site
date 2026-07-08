@@ -105,7 +105,7 @@ function Contact() {
             <div className="wb-sent">
               <div className="wb-sent__check">✓</div>
               <h3>Thank you{name ? `, ${name.split(' ')[0]}` : ''}.</h3>
-              <p>Your note is on its way to Rob. Expect a reply within one working day.</p>
+              <p>Your note is on its way to the team. Expect a reply within one working day.</p>
               <Button variant="secondary" onClick={()=>setStatus('idle')}>Send another</Button>
             </div>
           ) : (
