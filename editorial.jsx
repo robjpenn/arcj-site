@@ -136,9 +136,7 @@ function Footer({ onNav }) {
         </div>
         <div className="wb-footer__col">
           <div className="wb-footer__h">Services</div>
-          <a href="strategy-growth.html" className="wb-footer__link">Strategy &amp; Growth</a>
-          <a href="marketing-brand.html" className="wb-footer__link">Marketing &amp; Brand</a>
-          <a href="board-advisory.html" className="wb-footer__link">Board Advisory</a>
+          <div class="pg-nav__drop"><button type="button" class="pg-nav__link pg-nav__trigger" aria-haspopup="true" aria-expanded="false">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="pg-nav__menu"><a href="strategy-growth.html">Strategy &amp; Growth</a><a href="marketing-brand.html">Marketing &amp; Brand</a><a href="board-advisory.html">Board Advisory</a><a href="minority-shareholders.html">Minority Shareholder Support</a></div></div>
         </div>
         <div className="wb-footer__col">
           <div className="wb-footer__h">Firm</div>
